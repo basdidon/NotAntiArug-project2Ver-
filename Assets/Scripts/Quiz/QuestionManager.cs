@@ -12,6 +12,9 @@ public class QuestionManager : MonoBehaviour
     public GameObject topBar;
     public GameObject summaryHolder;
 
+    public GameObject correctIcon;
+    public GameObject incorrectIcon;
+
     public Text questionNumber;
     public Text questionText;
     public Text choice1_Text;
@@ -44,7 +47,7 @@ public class QuestionManager : MonoBehaviour
         instance = this;
 
         questions.Add(new Question(1, "ยาเสพติดประเภทที่ 1 เป็นยาเสพติดออกฤทธิ์อย่างไร", "กดประสาท", "หลอนประสาท", "กระตุ้นประสาท", "ผสมผสาน", 1, 100));
-        questions.Add(new Question(2, "ยาเสพติดประเภทกดประสาทส่งผล", "กัญชา", "ยาอี", "บุหรี่", "เหล้า", 1, 100));
+        questions.Add(new Question(2, "ยาเสพติดประเภทกดประสาทส่งผล", "ยาบ้า", "เหล้า", "บุหรี่", "ยาอี", 2, 100));
 
         for(int i = 0; i < questions.Count; i++)
         {
@@ -67,6 +70,10 @@ public class QuestionManager : MonoBehaviour
             if (Input.anyKeyDown)
             {
                 currentQuestion++;
+
+                correctIcon.SetActive(false);
+                incorrectIcon.SetActive(false);
+
                 nextQuestion();
 
                 choice1_Button.enabled = true;
@@ -132,16 +139,19 @@ public class QuestionManager : MonoBehaviour
         if(answer == questions[currentQuestion].key)
         {
             Debug.Log("correct answer");
+            //show icon
+            correctIcon.SetActive(true);
             //add score
             FindObjectOfType<scoreManager>().addScore(scoreToAdd);
-            //go to nextquestion
-            currentQuestion++;
-            nextQuestion();
+
+            isWait = true;
         }
         else
         {
             //redure score
             FindObjectOfType<scoreManager>().reduceScore(scoreToRedure);
+            //show icon
+            incorrectIcon.SetActive(true);
             //show right answer
             switch (questions[currentQuestion].key)
             {

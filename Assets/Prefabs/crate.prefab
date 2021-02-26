@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4910736956019789048}
   - component: {fileID: 4910736956019789046}
   - component: {fileID: 4910736956019789047}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: crate
   m_TagString: Box
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1901065509
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f8e77c77c934840408f1c66a197e41c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

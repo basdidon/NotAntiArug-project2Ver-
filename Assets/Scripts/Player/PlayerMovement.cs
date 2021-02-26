@@ -88,11 +88,13 @@ public class PlayerMovement : MonoBehaviour
         if (moveHorizontal < 0) {
             transform.localScale = new Vector3(-1, 1, 1);
             facingRight = false;
+            anim.SetFloat("moveSpeed",1f);
         } else if (moveHorizontal > 0) {
             transform.localScale = new Vector3(1, 1, 1);
             facingRight = true;
+            anim.SetFloat("moveSpeed", 1f);
         } else {
-
+            anim.SetFloat("moveSpeed", 0f);
         }
     }
 

@@ -31,7 +31,7 @@ public class cameraController : MonoBehaviour
             cameraX = target.position.x - cameraOffset;
         }
 
-        cameraY = target.position.y+3;
+        cameraY = target.position.y+2;
 
         Mathf.Clamp(cameraX, cameraXmin, cameraXmax);
         Mathf.Clamp(cameraY, cameraYmin, cameraYmax);
