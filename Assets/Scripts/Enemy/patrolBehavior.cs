@@ -78,4 +78,14 @@ public class patrolBehavior : MonoBehaviour
                 rigidBody2d.velocity = new Vector2(speed, rigidBody2d.velocity.y);
             }
     }
+
+    private void OnBecameInvisible()
+    {
+        enabled = false;
+    }
+
+    private void OnBecameVisible()
+    {
+        enabled = true;
+    }
 }

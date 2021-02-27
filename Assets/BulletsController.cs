@@ -21,5 +21,4 @@ public class BulletsController : MonoBehaviour
         Debug.Log(bullets[0].bulletsName);
         Debug.Log(bullets[1].bulletsName);
     }
-
 }

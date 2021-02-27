@@ -56,6 +56,6 @@ public class BulletBehavior : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        Destroy(gameObject,0.0125f);
+        Destroy(gameObject, 0.0125f);
     }
 }
