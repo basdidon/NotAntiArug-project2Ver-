@@ -14,11 +14,11 @@ public class HPbarUI : MonoBehaviour
 
     void Update()
     {
-        hpPercentage = (float)PlayerController.instance.currentHP / (float)PlayerController.instance.maxHP;
+        hpPercentage = (float)Player.instance.currentHP / (float)Player.instance.maxHP;
         Hpbarholder.localScale = new Vector3(hpPercentage, 1, 1);
 
-        currentHpText.text = PlayerController.instance.currentHP.ToString();
-        maxHpText.text = PlayerController.instance.maxHP.ToString();
+        currentHpText.text = Player.instance.currentHP.ToString();
+        maxHpText.text = Player.instance.maxHP.ToString();
     }
 
 }

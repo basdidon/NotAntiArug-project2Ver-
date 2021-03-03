@@ -8,7 +8,7 @@ public class deathTrigger : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            PlayerController.instance.dealDamage(99999);
+            Player.instance.dealDamage(99999);
         }
     }
 }

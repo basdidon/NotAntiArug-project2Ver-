@@ -13,9 +13,9 @@ public class Checkpoint : MonoBehaviour
         Debug.Log("OnTriggerEnter2D");
         if (collision.CompareTag("Player"))
         {
-            CheckPointController.instance.DeactiveCheckPoint();
+            LevelManager.instance.DeactiveCheckPoint();
             spriteRenderer.sprite = checkPointOnSprite;
-            CheckPointController.instance.SetSpawnPoint(transform.position);
+            LevelManager.instance.SetSpawnPoint(transform.position);
             //PlayerController.instance.currentHP = PlayerController.instance.maxHP;
         }
     }

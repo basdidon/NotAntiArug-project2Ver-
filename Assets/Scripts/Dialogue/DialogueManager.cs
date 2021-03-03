@@ -28,7 +28,7 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log("Starting conversation with "+dialogue.name);
         dialogBox.SetActive(true);
-        PlayerController.instance.gameObject.SetActive(false);
+        Player.instance.gameObject.SetActive(false);
         Time.timeScale = 0;
 
         NameText.text = dialogue.name;
@@ -56,7 +56,7 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log("End of conversation");
         dialogBox.SetActive(false);
-        PlayerController.instance.gameObject.SetActive(true);
+        Player.instance.gameObject.SetActive(true);
         Time.timeScale = 1;
     }
 }

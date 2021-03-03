@@ -8,11 +8,6 @@ public class scoreManager : MonoBehaviour
     public static int currentScore = 0;
     public Text text;
 
-    private void Start()
-    {
-        
-    }
-
     private void Update()
     {
         text.text = currentScore.ToString();

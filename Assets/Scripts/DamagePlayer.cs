@@ -12,7 +12,7 @@ public class DamagePlayer : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Debug.Log("player hit");
-            PlayerController.instance.dealDamage(damage);
+            Player.instance.dealDamage(damage);
         }
     }
 }

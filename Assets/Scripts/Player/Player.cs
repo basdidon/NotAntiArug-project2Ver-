@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
-    public static PlayerController instance;
+    public static Player instance;
 
     private SpriteRenderer spriteRendererPlayer;
     public Animator anim;
