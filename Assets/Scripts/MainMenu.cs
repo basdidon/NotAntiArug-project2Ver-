@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(startScene);
+        scoreManager.currentScore = 0;
     } 
 
     public void OpenCredit()

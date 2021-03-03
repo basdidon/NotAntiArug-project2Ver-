@@ -10,7 +10,7 @@ public class scoreManager : MonoBehaviour
 
     private void Start()
     {
-        currentScore = 0;
+        
     }
 
     private void Update()

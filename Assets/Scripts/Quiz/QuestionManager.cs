@@ -12,6 +12,9 @@ public class QuestionManager : MonoBehaviour
     public GameObject topBar;
     public GameObject summaryHolder;
 
+    public GameObject correctIcon;
+    public GameObject incorrectIcon;
+
     public Text questionNumber;
     public Text questionText;
     public Text choice1_Text;
@@ -32,6 +35,11 @@ public class QuestionManager : MonoBehaviour
 
     public List<Question> questions = new List<Question>();
 
+    public int numChoice = 4;
+    public string tempString;
+    public int keyIndex;
+    string[] choiceArray;
+
     public int currentQuestion = 0;
 
     public int scoreToAdd = 100;
@@ -44,12 +52,9 @@ public class QuestionManager : MonoBehaviour
         instance = this;
 
         questions.Add(new Question(1, "ยาเสพติดประเภทที่ 1 เป็นยาเสพติดออกฤทธิ์อย่างไร", "กดประสาท", "หลอนประสาท", "กระตุ้นประสาท", "ผสมผสาน", 1, 100));
-        questions.Add(new Question(2, "ยาเสพติดประเภทกดประสาทส่งผล", "กัญชา", "ยาอี", "บุหรี่", "เหล้า", 1, 100));
+        questions.Add(new Question(2, "ยาเสพติดประเภทกดประสาทส่งผล", "ยาบ้า", "เหล้า", "บุหรี่", "ยาอี", 2, 100));
 
-        for(int i = 0; i < questions.Count; i++)
-        {
-            Debug.Log(questions[i].question + " (" + questions[i].key + ")");
-        }
+        
 
         nextQuestion();
         
@@ -67,6 +72,10 @@ public class QuestionManager : MonoBehaviour
             if (Input.anyKeyDown)
             {
                 currentQuestion++;
+
+                correctIcon.SetActive(false);
+                incorrectIcon.SetActive(false);
+
                 nextQuestion();
 
                 choice1_Button.enabled = true;
@@ -81,6 +90,26 @@ public class QuestionManager : MonoBehaviour
     {
         isWait = false;
 
+        
+        choiceArray = new string[] { questions[currentQuestion].choice1, questions[currentQuestion].choice2, questions[currentQuestion].choice3, questions[currentQuestion].choice4 };
+        keyIndex = questions[currentQuestion].key - 1;
+
+        for (int i = 0; i < choiceArray.Length-1; i++)
+        {
+            int rnd = Random.Range(i, numChoice);
+            tempString = choiceArray[rnd];
+            choiceArray[rnd] = choiceArray[i];
+            choiceArray[i] = tempString;
+
+            if(rnd == keyIndex)
+            {
+                keyIndex = i;
+            }else if(i == keyIndex)
+            {
+                keyIndex = rnd;
+            }
+        }
+
         if (currentQuestion < questions.Count)
         {
             questionNumber.text = questions[currentQuestion].questionNumber.ToString();
@@ -91,10 +120,10 @@ public class QuestionManager : MonoBehaviour
             choice4_Button.GetComponent<Image>().color = defaultButtonColor;
 
             questionText.text = questions[currentQuestion].question.ToString();
-            choice1_Text.text = questions[currentQuestion].choice1.ToString();
-            choice2_Text.text = questions[currentQuestion].choice2.ToString();
-            choice3_Text.text = questions[currentQuestion].choice3.ToString();
-            choice4_Text.text = questions[currentQuestion].choice4.ToString();
+            choice1_Text.text = choiceArray[0].ToString();
+            choice2_Text.text = choiceArray[1].ToString();
+            choice3_Text.text = choiceArray[2].ToString();
+            choice4_Text.text = choiceArray[3].ToString();
         }
         else
         {
@@ -109,53 +138,72 @@ public class QuestionManager : MonoBehaviour
 
     public void answerChoice1()
     {
-        checkAnswer(1);
+        checkAnswer(0);
     }
 
     public void answerChoice2()
     {
-        checkAnswer(2);
+        checkAnswer(1);
     }
 
     public void answerChoice3()
     {
-        checkAnswer(3);
+        checkAnswer(2);
     }
 
     public void answerChoice4()
     {
-        checkAnswer(4);
+        checkAnswer(3);
     }
 
     public void checkAnswer(int answer)
     {
-        if(answer == questions[currentQuestion].key)
+        if(answer == keyIndex)
         {
             Debug.Log("correct answer");
+            //show icon
+            correctIcon.SetActive(true);
             //add score
             FindObjectOfType<scoreManager>().addScore(scoreToAdd);
-            //go to nextquestion
-            currentQuestion++;
-            nextQuestion();
+
+            switch (keyIndex)
+            {
+                case 0:
+                    choice1_Button.GetComponent<Image>().color = CorrectButtonColor;
+                    break;
+                case 1:
+                    choice2_Button.GetComponent<Image>().color = CorrectButtonColor;
+                    break;
+                case 2:
+                    choice3_Button.GetComponent<Image>().color = CorrectButtonColor;
+                    break;
+                case 3:
+                    choice4_Button.GetComponent<Image>().color = CorrectButtonColor;
+                    break;
+            }
+
+            isWait = true;
         }
         else
         {
             //redure score
             FindObjectOfType<scoreManager>().reduceScore(scoreToRedure);
+            //show icon
+            incorrectIcon.SetActive(true);
             //show right answer
-            switch (questions[currentQuestion].key)
+            switch (keyIndex)
             {
-                case 1:
+                case 0:
                     choice1_Button.GetComponent<Image>().color = CorrectButtonColor;
                     break;
-                case 2:
+                case 1:
                     choice2_Button.GetComponent<Image>().color = CorrectButtonColor;
+                    break;
+                case 2:
+                    choice3_Button.GetComponent<Image>().color = CorrectButtonColor;
                     break;
                 case 3:
-                    choice2_Button.GetComponent<Image>().color = CorrectButtonColor;
-                    break;
-                case 4:
-                    choice2_Button.GetComponent<Image>().color = CorrectButtonColor;
+                    choice3_Button.GetComponent<Image>().color = CorrectButtonColor;
                     break;
             }
             //wait player click button or press any key then go to nextquestion

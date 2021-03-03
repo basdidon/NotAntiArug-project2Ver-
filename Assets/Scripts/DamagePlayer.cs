@@ -15,15 +15,4 @@ public class DamagePlayer : MonoBehaviour
             PlayerController.instance.dealDamage(damage);
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            Debug.Log("player hit");
-            PlayerController.instance.dealDamage(damage);
-        }
-    }
-
-
 }
