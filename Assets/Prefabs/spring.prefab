@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4942837013879271044}
   - component: {fileID: 4942837013879271047}
-  - component: {fileID: 4942837013879271046}
   - component: {fileID: 4942837013879271161}
+  - component: {fileID: 8342646089403853231}
   m_Layer: 0
   m_Name: spring
   m_TagString: Platform
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4942837013879271160}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10.844965, y: -3.03553, z: 4.5608363}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1901065509
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -4272949958406870782, guid: cc4e46220a8dc6043b0a580ace17fce4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -84,25 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!251 &4942837013879271046
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4942837013879271160}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 256
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 110
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
 --- !u!61 &4942837013879271161
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -112,8 +93,8 @@ BoxCollider2D:
   m_GameObject: {fileID: 4942837013879271160}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: e4678acac3175e744bbc39d11c3132f4, type: 2}
-  m_IsTrigger: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.13243997}
@@ -129,3 +110,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.26422286}
   m_EdgeRadius: 0
+--- !u!114 &8342646089403853231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4942837013879271160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52fa9798073c4ae4f9e9bf05e4e356ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  bounceForce: 25

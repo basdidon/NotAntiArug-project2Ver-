@@ -11,6 +11,7 @@ public class GlueFloorScript : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             PlayerMovement.instance.speed = PlayerMovement.instance.speed * (slowRate / 100);
+            Debug.Log("trigged glue");
         }
     }
 

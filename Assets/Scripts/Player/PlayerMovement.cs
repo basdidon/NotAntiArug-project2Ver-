@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     // object variable
     public GameObject bulletPrefab;
-    private Rigidbody2D playerRigidbody2d;
+    public Rigidbody2D playerRigidbody2d;
     public SpriteRenderer playerSpriteRenderer;
     public Transform aim;
     public Transform groundCheckpoint;
@@ -37,6 +37,17 @@ public class PlayerMovement : MonoBehaviour
     public int currentBulletsID = 1;
     public int i;
 
+    //knockback variable
+    [Header("knockback")]
+    public bool isKnockbacking = false;
+    public float knockbackTime = 0.5f;
+    public float knockbackTimeCounter;
+    [SerializeField]
+    private float knockbackX = 200f;
+    [SerializeField]
+    private float knockbackY = 400f;
+
+
     void Start()
     {
         instance = this;
@@ -47,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         isGround = Physics2D.OverlapCircle(groundCheckpoint.position, 0.2f, whatIsGround);
-
+        
         if (isGround)
         {
             anim.SetBool("isGround", true);
@@ -57,6 +68,31 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("isGround", false);
         }
+        
+        if (isKnockbacking)
+        {
+            knockbackTimeCounter -= Time.deltaTime;
+            if (knockbackTimeCounter > 0)
+            {
+                if (facingRight)
+                {
+                    //playerRigidbody2d.velocity = new Vector2(-knockbackX, playerRigidbody2d.velocity.y + knockbackY);
+                    playerRigidbody2d.AddForce(new Vector2(-knockbackX, knockbackY),ForceMode2D.Force);
+                }
+                else
+                {
+                    //playerRigidbody2d.velocity = new Vector2(knockbackX, playerRigidbody2d.velocity.y + knockbackY);
+                    playerRigidbody2d.AddForce(new Vector2(knockbackX, knockbackY),ForceMode2D.Force);
+                }
+            }
+            else
+            {
+                isKnockbacking = false;
+                //playerRigidbody2d.velocity = new Vector2(0, playerRigidbody2d.velocity.y + knockbackY);
+            }
+            
+        }
+        
         //jump
         if (Input.GetButtonDown("Jump") /*&& jumpcount < maxJump && nextJump < Time.time*/)
         {
@@ -76,13 +112,19 @@ public class PlayerMovement : MonoBehaviour
             changeBullets();
         }
 
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            playerRigidbody2d.AddForce(transform.right * knockbackX);
+            playerRigidbody2d.AddForce(transform.up * knockbackY);
+        }
+
     }
 
     void FixedUpdate()
     {
         //horizontal move
         moveHorizontal = Input.GetAxis("Horizontal");
-        playerRigidbody2d.velocity = new Vector2(moveHorizontal*speed,playerRigidbody2d.velocity.y) ;
+        //playerRigidbody2d.velocity = new Vector2(moveHorizontal*speed,playerRigidbody2d.velocity.y) ;
 
         //facing handle
         if (moveHorizontal < 0) {
@@ -164,6 +206,12 @@ public class PlayerMovement : MonoBehaviour
             currentBulletsID = 1;
         }
         Debug.Log("PlayerMovement change bullets to :" + currentBulletsID + " / " + BulletsController.instance.bullets.Count);
+    }
+
+    public void knockback()
+    {
+        isKnockbacking = true;
+        knockbackTimeCounter = knockbackTime;
     }
 }
 
