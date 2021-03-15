@@ -54,8 +54,6 @@ public class QuestionManager : MonoBehaviour
         questions.Add(new Question(1, "ยาเสพติดประเภทที่ 1 เป็นยาเสพติดออกฤทธิ์อย่างไร", "กดประสาท", "หลอนประสาท", "กระตุ้นประสาท", "ผสมผสาน", 1, 100));
         questions.Add(new Question(2, "ยาเสพติดประเภทกดประสาทส่งผล", "ยาบ้า", "เหล้า", "บุหรี่", "ยาอี", 2, 100));
 
-        
-
         nextQuestion();
         
     }
@@ -90,13 +88,12 @@ public class QuestionManager : MonoBehaviour
     {
         isWait = false;
 
-        
         choiceArray = new string[] { questions[currentQuestion].choice1, questions[currentQuestion].choice2, questions[currentQuestion].choice3, questions[currentQuestion].choice4 };
         keyIndex = questions[currentQuestion].key - 1;
 
         for (int i = 0; i < choiceArray.Length-1; i++)
         {
-            int rnd = Random.Range(i, numChoice);
+            int rnd = Random.Range(i, choiceArray.Length);
             tempString = choiceArray[rnd];
             choiceArray[rnd] = choiceArray[i];
             choiceArray[i] = tempString;

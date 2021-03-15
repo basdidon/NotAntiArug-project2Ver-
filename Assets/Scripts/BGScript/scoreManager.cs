@@ -8,13 +8,15 @@ public class scoreManager : MonoBehaviour
     public static int currentScore = 0;
     public Text text;
 
-    private void Update()
+    private void Start()
     {
-        text.text = currentScore.ToString();
+        UpdateScoreUI();
     }
     public void addScore(int score)
     {
         currentScore += score;
+
+        UpdateScoreUI();
         Debug.Log("score = " + currentScore);
     }
 
@@ -25,6 +27,14 @@ public class scoreManager : MonoBehaviour
         {
             currentScore = 0;
         }
+
+        UpdateScoreUI();
+        Debug.Log("score = " + currentScore);
+    }
+
+    public void UpdateScoreUI()
+    {
+        text.text = currentScore.ToString();
     }
 
 }

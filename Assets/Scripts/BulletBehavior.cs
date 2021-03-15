@@ -23,17 +23,7 @@ public class BulletBehavior : MonoBehaviour
 
     public void throwDirection(Vector2 direction)
     {
-        if(direction == Vector2.right)
-        {
-            bulletRigidbody.velocity = Vector2.right*bulletSpeed;
-            Debug.Log("throwDirection_right");
-        }
-        else if(direction == Vector2.left)
-        {
-            bulletRigidbody.velocity = Vector2.left*bulletSpeed;
-            Debug.Log("throwDirection_left");
-
-        }
+        bulletRigidbody.velocity = direction * bulletSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

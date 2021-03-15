@@ -14,15 +14,21 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D playerRigidbody2d;
     public SpriteRenderer playerSpriteRenderer;
     public Transform aim;
+    public Transform aimUp;
     public Transform groundCheckpoint;
     public LayerMask whatIsGround;
 
     // facing variable
-    private bool facingRight = true;
+    private bool facingRight = false;
 
     // move varible
     public float speed = 8f;
     public float moveHorizontal;
+
+    //aim varible
+    public float aimVertical;
+    public bool isAimDown;
+    public bool isAimUp;
 
     //jump variable
     public bool isGround = false;
@@ -82,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //horizontal move
         moveHorizontal = Input.GetAxis("Horizontal");
+        aimVertical = Input.GetAxis("Vertical");
         playerRigidbody2d.velocity = new Vector2(moveHorizontal*speed,playerRigidbody2d.velocity.y) ;
 
         //facing handle
@@ -95,6 +102,20 @@ public class PlayerMovement : MonoBehaviour
             anim.SetFloat("moveSpeed", 1f);
         } else {
             anim.SetFloat("moveSpeed", 0f);
+        }
+
+        //
+        if (aimVertical < 0)
+        {
+            isAimDown = true;
+        }else if (aimVertical > 0)
+        {
+            isAimUp = true;
+        }
+        else
+        {
+            isAimUp = false;
+            isAimDown = false;
         }
     }
 
@@ -126,9 +147,6 @@ public class PlayerMovement : MonoBehaviour
                 isCanDoubleJump = false;
             }
         }
-        
-
-       
     }
 
     private void shoot()
@@ -141,15 +159,42 @@ public class PlayerMovement : MonoBehaviour
 
             if (facingRight)
             {
-                GameObject bulletInstance = (GameObject)Instantiate(BulletsController.instance.bullets[i].bulletPrefab, aim.position, aim.rotation);
-                bulletInstance.GetComponent<BulletBehavior>().throwDirection(Vector2.right);
-                Debug.Log("shoot_Right");
+                if (isAimUp)
+                {
+                    GameObject bulletInstance = (GameObject)Instantiate(BulletsController.instance.bullets[i].bulletPrefab, aim.position, aim.rotation);
+                    bulletInstance.GetComponent<BulletBehavior>().throwDirection(new Vector2(1,1));
+                }
+                else if(isAimDown)
+                {
+                    GameObject bulletInstance = (GameObject)Instantiate(BulletsController.instance.bullets[i].bulletPrefab, aim.position, aim.rotation);
+                    bulletInstance.GetComponent<BulletBehavior>().throwDirection(new Vector2(1,-1));
+                }
+                else
+                {
+                    GameObject bulletInstance = (GameObject)Instantiate(BulletsController.instance.bullets[i].bulletPrefab, aim.position, aim.rotation);
+                    bulletInstance.GetComponent<BulletBehavior>().throwDirection(Vector2.right);
+                    Debug.Log("shoot_Right");
+                }
+
             }
             else
             {
-                GameObject bulletInstance = (GameObject)Instantiate(BulletsController.instance.bullets[i].bulletPrefab, aim.position, aim.rotation);
-                bulletInstance.GetComponent<BulletBehavior>().throwDirection(Vector2.left);
-                Debug.Log("shoot_Left");
+                if (isAimUp)
+                {
+                    GameObject bulletInstance = (GameObject)Instantiate(BulletsController.instance.bullets[i].bulletPrefab, aim.position, aim.rotation);
+                    bulletInstance.GetComponent<BulletBehavior>().throwDirection(new Vector2(-1, 1));
+                }
+                else if (isAimDown)
+                {
+                    GameObject bulletInstance = (GameObject)Instantiate(BulletsController.instance.bullets[i].bulletPrefab, aim.position, aim.rotation);
+                    bulletInstance.GetComponent<BulletBehavior>().throwDirection(new Vector2(-1, -1));
+                }
+                else
+                {
+                    GameObject bulletInstance = (GameObject)Instantiate(BulletsController.instance.bullets[i].bulletPrefab, aim.position, aim.rotation);
+                    bulletInstance.GetComponent<BulletBehavior>().throwDirection(Vector2.left);
+                    Debug.Log("shoot_Left");
+                }
             }
             nextFire = Time.time + fireRate;
         }
