@@ -39,13 +39,10 @@ public class PlayerMovement : MonoBehaviour
 
     //knockback variable
     [Header("knockback")]
-    public bool isKnockbacking = false;
     public float knockbackTime = 0.5f;
     public float knockbackTimeCounter;
     [SerializeField]
-    private float knockbackX = 200f;
-    [SerializeField]
-    private float knockbackY = 400f;
+    private float knockbackPwr = 50f;
 
 
     void Start()
@@ -69,29 +66,7 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("isGround", false);
         }
         
-        if (isKnockbacking)
-        {
-            knockbackTimeCounter -= Time.deltaTime;
-            if (knockbackTimeCounter > 0)
-            {
-                if (facingRight)
-                {
-                    //playerRigidbody2d.velocity = new Vector2(-knockbackX, playerRigidbody2d.velocity.y + knockbackY);
-                    playerRigidbody2d.AddForce(new Vector2(-knockbackX, knockbackY),ForceMode2D.Force);
-                }
-                else
-                {
-                    //playerRigidbody2d.velocity = new Vector2(knockbackX, playerRigidbody2d.velocity.y + knockbackY);
-                    playerRigidbody2d.AddForce(new Vector2(knockbackX, knockbackY),ForceMode2D.Force);
-                }
-            }
-            else
-            {
-                isKnockbacking = false;
-                //playerRigidbody2d.velocity = new Vector2(0, playerRigidbody2d.velocity.y + knockbackY);
-            }
-            
-        }
+        
         
         //jump
         if (Input.GetButtonDown("Jump") /*&& jumpcount < maxJump && nextJump < Time.time*/)
@@ -114,29 +89,48 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            playerRigidbody2d.AddForce(transform.right * knockbackX);
-            playerRigidbody2d.AddForce(transform.up * knockbackY);
+            knockback();
         }
 
     }
 
     void FixedUpdate()
     {
-        //horizontal move
-        moveHorizontal = Input.GetAxis("Horizontal");
-        //playerRigidbody2d.velocity = new Vector2(moveHorizontal*speed,playerRigidbody2d.velocity.y) ;
+        if (knockbackTimeCounter <= 0)
+        {
+            //horizontal move
+            moveHorizontal = Input.GetAxis("Horizontal");
+            playerRigidbody2d.velocity = new Vector2(moveHorizontal*speed,playerRigidbody2d.velocity.y) ;
 
-        //facing handle
-        if (moveHorizontal < 0) {
-            transform.localScale = new Vector3(-1, 1, 1);
-            facingRight = false;
-            anim.SetFloat("moveSpeed",1f);
-        } else if (moveHorizontal > 0) {
-            transform.localScale = new Vector3(1, 1, 1);
-            facingRight = true;
-            anim.SetFloat("moveSpeed", 1f);
-        } else {
-            anim.SetFloat("moveSpeed", 0f);
+            //facing handle
+            if (moveHorizontal < 0)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+                facingRight = false;
+                anim.SetFloat("moveSpeed", 1f);
+            }
+            else if (moveHorizontal > 0)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+                facingRight = true;
+                anim.SetFloat("moveSpeed", 1f);
+            }
+            else
+            {
+                anim.SetFloat("moveSpeed", 0f);
+            }
+        }
+        else
+        {
+            knockbackTimeCounter -= Time.deltaTime;
+            if (facingRight)
+            {
+                playerRigidbody2d.velocity = new Vector2(-knockbackPwr, playerRigidbody2d.velocity.y);
+            }
+            else
+            {
+                playerRigidbody2d.velocity = new Vector2(knockbackPwr, playerRigidbody2d.velocity.y);
+            }
         }
     }
 
@@ -210,8 +204,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void knockback()
     {
-        isKnockbacking = true;
         knockbackTimeCounter = knockbackTime;
+        playerRigidbody2d.velocity = new Vector2(0f, knockbackPwr);
     }
 }
 
