@@ -49,6 +49,8 @@ public class Player : MonoBehaviour
         if (invincibleCounter <= 0)
         {
             currentHP = currentHP - damage;
+            PlayerMovement.instance.knockback();
+
             if (currentHP <= 0)
             {
                 FindObjectOfType<scoreManager>().reduceScore(scoreToReduce);
