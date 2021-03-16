@@ -49,7 +49,6 @@ public class Player : MonoBehaviour
         if (invincibleCounter <= 0)
         {
             currentHP = currentHP - damage;
-            PlayerMovement.instance.knockback();
 
             if (currentHP <= 0)
             {
@@ -62,6 +61,10 @@ public class Player : MonoBehaviour
             }
             else
             {
+                //do knockback
+                PlayerMovement.instance.knockback();
+
+                //invincible state
                 invincibleCounter = invincibleLength;
                 spriteRendererPlayer.color = new Color(spriteRendererPlayer.color.r, spriteRendererPlayer.color.g, spriteRendererPlayer.color.b, 0.5f);
                 
