@@ -14,8 +14,12 @@ public class DialogueTrigger : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.F)&&isPlayerInRange)
         {
-            
-            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            if (DialogueManager.instance.isTalking == false)
+            {
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            }
+
+            FindObjectOfType<DialogueManager>().DisplayNextSentence();
         }
     }
 

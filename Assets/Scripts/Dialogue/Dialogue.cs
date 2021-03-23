@@ -1,11 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
-public class Dialogue 
+public class Dialogue
 {
-    public string name;
+    public enum Speaker
+    {
+        player,
+        doctor,
+        Boss1,
+        Boss2,
+        Boss3,
+    }
+
+    public Speaker[] speaker;
+
+    public static string[] inGameNameSpeaker = {
+        "น็อต",
+        "ด็อกเตอร์",
+        "บอส1",
+        "บอส2",
+        "บอส3" 
+    };
 
     [TextArea(3,5)]
     public string[] sentences;
