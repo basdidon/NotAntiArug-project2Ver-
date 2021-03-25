@@ -560,6 +560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -921,6 +922,7 @@ MonoBehaviour:
   choice2_Text: {fileID: 42178043}
   choice3_Text: {fileID: 1475943570}
   choice4_Text: {fileID: 1098036736}
+  timeLeft_Text: {fileID: 2131545251}
   choice1_Button: {fileID: 1255083960}
   choice2_Button: {fileID: 175665972}
   choice3_Button: {fileID: 441743992}
@@ -929,7 +931,12 @@ MonoBehaviour:
   mainMenuScene: MainMenuScene
   defaultButtonColor: {r: 0, g: 0, b: 1, a: 1}
   CorrectButtonColor: {r: 0, g: 1, b: 0.09278011, a: 1}
+  numChoice: 4
+  tempString: 
+  keyIndex: 0
   currentQuestion: 0
+  time: 120
+  timeLeft: 0
   scoreToAdd: 100
   scoreToRedure: 100
   isWait: 0
@@ -1019,6 +1026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1400,6 +1408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1537,6 +1546,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &811043985
 Canvas:
   m_ObjectHideFlags: 0
@@ -1950,6 +1960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -2121,6 +2132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -2806,6 +2818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}

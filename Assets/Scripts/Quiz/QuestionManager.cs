@@ -21,6 +21,7 @@ public class QuestionManager : MonoBehaviour
     public Text choice2_Text;
     public Text choice3_Text;
     public Text choice4_Text;
+    public Text timeLeft_Text;
 
     public Button choice1_Button; 
     public Button choice2_Button;
@@ -42,6 +43,9 @@ public class QuestionManager : MonoBehaviour
 
     public int currentQuestion = 0;
 
+    [SerializeField] private float time = 120f;
+    [SerializeField] private int timeLeft;
+
     public int scoreToAdd = 100;
     public int scoreToRedure = 100;
 
@@ -53,6 +57,8 @@ public class QuestionManager : MonoBehaviour
 
         questions.Add(new Question(1, "ยาเสพติดประเภทที่ 1 เป็นยาเสพติดออกฤทธิ์อย่างไร", "กดประสาท", "หลอนประสาท", "กระตุ้นประสาท", "ผสมผสาน", 1, 100));
         questions.Add(new Question(2, "ยาเสพติดประเภทกดประสาทส่งผล", "ยาบ้า", "เหล้า", "บุหรี่", "ยาอี", 2, 100));
+
+        timeLeft = (int)time;
 
         nextQuestion();
         
@@ -81,6 +87,18 @@ public class QuestionManager : MonoBehaviour
                 choice3_Button.enabled = true;
                 choice4_Button.enabled = true;
             }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        timeLeft = (int)(time-Time.time);
+
+        timeLeft_Text.text = timeLeft.ToString();
+
+        if (timeLeft <= 0)
+        {
+            EndQuiz();
         }
     }
 
@@ -124,12 +142,7 @@ public class QuestionManager : MonoBehaviour
         }
         else
         {
-            //deactive question ui and active summary ui
-            questionHolder.SetActive(false);
-            topBar.SetActive(false);
-            summaryHolder.SetActive(true);
-            //showscore
-            //use FindObjectOfType<scoreManager>().currentScore;
+            EndQuiz();
         }
     }
 
@@ -208,6 +221,16 @@ public class QuestionManager : MonoBehaviour
         }
     }
 
+    public void EndQuiz()
+    {
+        //deactive question ui and active summary ui
+        questionHolder.SetActive(false);
+        topBar.SetActive(false);
+        summaryHolder.SetActive(true);
+        //showscore
+        //use FindObjectOfType<scoreManager>().currentScore;
+    }
+
     public void loadNextScene()
     {
         SceneManager.LoadScene(nextScene);
@@ -217,4 +240,6 @@ public class QuestionManager : MonoBehaviour
     {
         SceneManager.LoadScene(mainMenuScene);
     }
+
+
 }
