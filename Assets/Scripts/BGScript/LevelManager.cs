@@ -11,8 +11,6 @@ public class LevelManager : MonoBehaviour
     public Vector3 spawnPoint;
     private float waitToRespawn = 2;
 
-    public Vector3[] enemySpawnPoint;
-
     private void Awake()
     {
         instance = this;
@@ -23,8 +21,6 @@ public class LevelManager : MonoBehaviour
         checkpoints = FindObjectsOfType<Checkpoint>();
 
         spawnPoint = Player.instance.transform.position;
-
-        RandomSpawnEnemy();
     }
 
     public void RespawnPlayer()
@@ -43,11 +39,8 @@ public class LevelManager : MonoBehaviour
         Player.instance.transform.position = spawnPoint;
     }
 
-    public void RandomSpawnEnemy()
-    {
-        //random enemy and spawn it to each position
-        
-    }
+    
+
 
     public void DeactiveCheckPoint()
     {

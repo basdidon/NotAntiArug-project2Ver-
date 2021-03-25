@@ -31,14 +31,19 @@ public class patrolBehavior : MonoBehaviour
         groundCheckerOriginRight = boxCollider2d.bounds.center + new Vector3(0.6f, 0, 0);
         groundCheckerDirection = Vector2.down * (boxCollider2d.bounds.extents.y + 0.8f);
 
-       
+
         if (!Physics2D.Raycast(groundCheckerOriginLeft, Vector2.down, boxCollider2d.bounds.extents.y + 0.8f))
         {
             isFacingLeft = false;
             //Debug.Log("Raycast left not hit platform");
         }
 
-        if(!Physics2D.Raycast(groundCheckerOriginRight, Vector2.down, boxCollider2d.bounds.extents.y + 0.8f))
+        if (!Physics2D.Raycast(groundCheckerOriginRight, Vector2.down, boxCollider2d.bounds.extents.y + 0.8f))
+        {
+            isFacingLeft = true;
+            //Debug.Log("Raycast right not hit platform");
+        }
+        if (!Physics2D.Raycast(groundCheckerOriginRight, Vector2.down, boxCollider2d.bounds.extents.y + 0.4f))
         {
             isFacingLeft = true;
             //Debug.Log("Raycast right not hit platform");
