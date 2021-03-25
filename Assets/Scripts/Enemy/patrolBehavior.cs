@@ -27,8 +27,8 @@ public class patrolBehavior : MonoBehaviour
 
     void Update()
     {
-        groundCheckerOriginLeft = boxCollider2d.bounds.center + new Vector3(-0.6f, 0, 0);
-        groundCheckerOriginRight = boxCollider2d.bounds.center + new Vector3(0.6f, 0, 0);
+        groundCheckerOriginLeft = boxCollider2d.bounds.center + new Vector3(-0.8f, 0, 0);
+        groundCheckerOriginRight = boxCollider2d.bounds.center + new Vector3(0.8f, 0, 0);
         groundCheckerDirection = Vector2.down * (boxCollider2d.bounds.extents.y + 0.8f);
 
 

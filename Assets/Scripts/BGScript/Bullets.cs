@@ -6,8 +6,17 @@ using UnityEngine;
 public class Bullets
 {
     //public static Bullets instance;
-    public int bulletsID;
+    public enum BulletsType
+    {
+        antiAll,
+        antiDepressants,
+        antiHallucinogens,
+        antiStimulants,
+        antiMultipleEffect
+    };
+
     public string bulletsName;
+    public BulletsType bulletsType;
     public int maxBullets;
     public int currentBullets;
     public int damagePower;
@@ -15,9 +24,9 @@ public class Bullets
     public Sprite sprite;
     public GameObject bulletPrefab;
 
-    public Bullets(int newBulletsID, string newBulletsName, int newMaxBullets, int newDamagePower, string newDescription, Sprite newSprite, GameObject newBulletPrefab)
+    public Bullets(BulletsType newBulletsType, string newBulletsName, int newMaxBullets, int newDamagePower, string newDescription, Sprite newSprite, GameObject newBulletPrefab)
     {
-        bulletsID = newBulletsID;
+        bulletsType = newBulletsType;
         bulletsName = newBulletsName;
         maxBullets = newMaxBullets;
         currentBullets = newMaxBullets;

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 9123703281346856885}
   - component: {fileID: -7434572981427742225}
   - component: {fileID: 3782869227706655947}
-  - component: {fileID: 946052127641209647}
   - component: {fileID: -6268159176983715813}
   m_Layer: 0
   m_Name: Alcohol
@@ -145,8 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edc0b01be7613d54490845aab6d6ccfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeid: 1
   EnemyHP: 3
+  enemies: 1
+  enemiesEffectType: 0
   itemDrop: {fileID: 0}
 --- !u!114 &3782869227706655947
 MonoBehaviour:
@@ -161,19 +161,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
---- !u!114 &946052127641209647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1634742641361743746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 988e802b742983647ab045de65d82631, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 20
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &-6268159176983715813
 Rigidbody2D:
   serializedVersion: 4

@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator anim;
 
-    // object variable
+    [Header("object variable")]
     public GameObject bulletPrefab;
     public Rigidbody2D playerRigidbody2d;
     public SpriteRenderer playerSpriteRenderer;
@@ -18,37 +18,33 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheckpoint;
     public LayerMask whatIsGround;
 
-    // facing variable
-    private bool facingRight = false;
-
-    // move varible
+    [Header("move variable")]
+    [SerializeField] private bool isTurnRight = false;
     public float speed = 8f;
     public float moveHorizontal;
 
-    //aim varible
+    [Header("aim variable")]
     public float aimVertical;
     public bool isAimDown;
     public bool isAimUp;
 
-    //jump variable
+    [Header("jump variable")]
     public bool isGround = false;
     public bool isCanDoubleJump = false;
     public int jumpForce = 15;
 
-    //fire variable
+    [Header("fire variable")]
     private float fireRate = 0.2f;
     private float nextFire = 0.0f;
 
-    //change bullet
+    [Header("change variable")]
     public int currentBulletsID = 1;
     public int i;
 
-    //knockback variable
-    [Header("knockback")]
-    public float knockbackTime = 0.5f;
+    [Header("knockback variable")]
+    public float knockbackTime = 0.3f;
     public float knockbackTimeCounter;
-    [SerializeField]
-    private float knockbackPwr = 50f;
+    [SerializeField] private float knockbackPwr = 7f;
 
 
     void Start()
@@ -71,8 +67,6 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("isGround", false);
         }
-        
-        
         
         //jump
         if (Input.GetButtonDown("Jump") /*&& jumpcount < maxJump && nextJump < Time.time*/)
@@ -106,19 +100,22 @@ public class PlayerMovement : MonoBehaviour
         {
             //horizontal move
             moveHorizontal = Input.GetAxis("Horizontal");
+            //vetacal aim
+            aimVertical = Input.GetAxis("Vertical");
+
             playerRigidbody2d.velocity = new Vector2(moveHorizontal*speed,playerRigidbody2d.velocity.y) ;
 
             //facing handle
             if (moveHorizontal < 0)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
-                facingRight = false;
+                isTurnRight = false;
                 anim.SetFloat("moveSpeed", 1f);
             }
             else if (moveHorizontal > 0)
             {
                 transform.localScale = new Vector3(1, 1, 1);
-                facingRight = true;
+                isTurnRight = true;
                 anim.SetFloat("moveSpeed", 1f);
             }
             else
@@ -129,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             knockbackTimeCounter -= Time.deltaTime;
-            if (facingRight)
+            if (isTurnRight)
             {
                 playerRigidbody2d.velocity = new Vector2(-knockbackPwr, playerRigidbody2d.velocity.y);
             }
@@ -154,22 +151,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    /*private void OnCollisionStay2D(Collision2D collision)
-    {
-        //monitor what player hit
-        //Debug.Log("onCollisionEnter2D  name : " + collision.gameObject.name + "    tag : " + collision.gameObject.tag);
-
-        //reset jumpcount when player hit the Ground
-        if (collision.gameObject.tag == "Platform") {
-            jumpcount = 0;
-            anim.SetBool("isGround", true);
-        }
-    }*/
-
     private void jump()
     {
-        
-
         if (isGround)
         {
             playerRigidbody2d.velocity = new Vector2(playerRigidbody2d.velocity.x, jumpForce);
@@ -192,7 +175,7 @@ public class PlayerMovement : MonoBehaviour
         {
             BulletsController.instance.bullets[i].currentBullets--;
 
-            if (facingRight)
+            if (isTurnRight)
             {
                 if (isAimUp)
                 {

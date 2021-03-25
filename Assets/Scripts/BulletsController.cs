@@ -6,7 +6,6 @@ public class BulletsController : MonoBehaviour
 {
     public static BulletsController instance;
 
-    //public int numOfBulletsType = 4;
     public Sprite[] sprites = new Sprite[4];
     public GameObject[] bulletsPrefab =  new GameObject[4];
     public List<Bullets> bullets = new List<Bullets>();
@@ -15,8 +14,8 @@ public class BulletsController : MonoBehaviour
     {
         instance = this;
 
-        bullets.Add(new Bullets(1, "สลายยาเสพติดประเภท 1", 20, 1, "best bullet forever", sprites[0], bulletsPrefab[0]));
-        bullets.Add(new Bullets(2, "สลายยาเสพติดประเภท 2", 20, 1, "boom", sprites[1], bulletsPrefab[1]));
+        bullets.Add(new Bullets(Bullets.BulletsType.antiDepressants, "สลายยาเสพติดประเภท 1", 20, 1, "best bullet forever", sprites[0], bulletsPrefab[1]));
+        bullets.Add(new Bullets(Bullets.BulletsType.antiHallucinogens, "สลายยาเสพติดประเภท 2", 20, 1, "boom", sprites[1], bulletsPrefab[2]));
 
         Debug.Log(bullets[0].bulletsName);
         Debug.Log(bullets[1].bulletsName);

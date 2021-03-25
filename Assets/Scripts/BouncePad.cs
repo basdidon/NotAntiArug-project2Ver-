@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class BouncePad : MonoBehaviour
 {
-    public Animator anim;
+    //public Animator anim;
 
     public float bounceForce;
     void Start()
     {
-        anim.GetComponent<Animator>();
+        //anim.GetComponent<Animator>();
         bounceForce = 25f;
     }
 

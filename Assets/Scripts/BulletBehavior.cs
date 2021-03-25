@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletBehavior : MonoBehaviour
 {
     [SerializeField]
-    private int bulletid;
+    private Bullets.BulletsType bulletsType;
 
     [SerializeField]
     private float bulletSpeed = 10f;
@@ -30,18 +30,39 @@ public class BulletBehavior : MonoBehaviour
     {
         if(collision.tag == "Enemy")
         {
-            if (bulletid == 0||bulletid == collision.GetComponent<EnemyHealthManager>().typeid)
+            if (bulletsType == Bullets.BulletsType.antiAll)
             {
-                Destroy(gameObject, 0.0125f);
-                collision.GetComponent<EnemyHealthManager>().damageEnemy(bulletDamage);
+                OnHitEnemy(collision);
             }
-            
+            else if (bulletsType == Bullets.BulletsType.antiDepressants && collision.GetComponent<Enemy>().enemiesEffectType == Enemy.EnemiesEffectType.depressants)
+            {
+                OnHitEnemy(collision);
+            }
+            else if (bulletsType == Bullets.BulletsType.antiHallucinogens && collision.GetComponent<Enemy>().enemiesEffectType == Enemy.EnemiesEffectType.hallucinogens)
+            {
+                OnHitEnemy(collision);
+            }
+            else if (bulletsType == Bullets.BulletsType.antiStimulants && collision.GetComponent<Enemy>().enemiesEffectType == Enemy.EnemiesEffectType.stimulants)
+            {
+                OnHitEnemy(collision);
+            }
+            else if (bulletsType == Bullets.BulletsType.antiMultipleEffect && collision.GetComponent<Enemy>().enemiesEffectType == Enemy.EnemiesEffectType.multipleEffect)
+            {
+                OnHitEnemy(collision);
+            }
+
         }
         
         if(collision.tag == "Platform")
         {
             Destroy(gameObject, 0.0125f);
         }
+    }
+
+    private void OnHitEnemy(Collider2D collision)
+    {
+        Destroy(gameObject, 0.0125f);
+        collision.GetComponent<Enemy>().damageEnemy(bulletDamage);
     }
 
     private void OnBecameInvisible()
