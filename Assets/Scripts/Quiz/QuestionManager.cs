@@ -35,13 +35,15 @@ public class QuestionManager : MonoBehaviour
     public Color CorrectButtonColor ;
 
     public List<Question> questions = new List<Question>();
+    public List<Question> shuffledQuestions = new List<Question>();
 
-    public int numChoice = 4;
+    public Question tempQuestion;
     public string tempString;
     public int keyIndex;
-    string[] choiceArray;
+    public string[] choiceArray;
 
     public int currentQuestion = 0;
+    public int questionAmount = 2;
 
     [SerializeField] private float time = 120f;
     [SerializeField] private int timeLeft;
@@ -55,8 +57,20 @@ public class QuestionManager : MonoBehaviour
     {
         instance = this;
 
-        questions.Add(new Question(1, "ยาเสพติดประเภทที่ 1 เป็นยาเสพติดออกฤทธิ์อย่างไร", "กดประสาท", "หลอนประสาท", "กระตุ้นประสาท", "ผสมผสาน", 1, 100));
-        questions.Add(new Question(2, "ยาเสพติดประเภทกดประสาทส่งผล", "ยาบ้า", "เหล้า", "บุหรี่", "ยาอี", 2, 100));
+        questions.Add(new Question("ยาเสพติดประเภทที่ 1 เป็นยาเสพติดออกฤทธิ์อย่างไร", "กดประสาท", "หลอนประสาท", "กระตุ้นประสาท", "ผสมผสาน", 1, 100));
+        questions.Add(new Question("ยาเสพติดประเภทกดประสาทส่งผล", "ยาบ้า", "เหล้า", "บุหรี่", "ยาอี", 2, 100));
+        questions.Add(new Question("1+1 = ?", "1", "2", "3", "4",1,100));
+        questions.Add(new Question("2+2 = ?", "1", "2", "3", "4", 4, 100));
+        questions.Add(new Question("3+3 = ?", "2", "3", "5", "6", 4, 100));
+
+        for(int i = 0; i < questions.Count; i++)
+        {
+            int rnd = Random.Range(i, questions.Count);
+            tempQuestion = questions[rnd];
+            questions[rnd] = questions[i];
+            questions[i] = tempQuestion;
+        }
+
 
         timeLeft = (int)time;
 
@@ -104,30 +118,30 @@ public class QuestionManager : MonoBehaviour
 
     public void nextQuestion()
     {
-        isWait = false;
-
-        choiceArray = new string[] { questions[currentQuestion].choice1, questions[currentQuestion].choice2, questions[currentQuestion].choice3, questions[currentQuestion].choice4 };
-        keyIndex = questions[currentQuestion].key - 1;
-
-        for (int i = 0; i < choiceArray.Length-1; i++)
+        if (currentQuestion < questionAmount)
         {
-            int rnd = Random.Range(i, choiceArray.Length);
-            tempString = choiceArray[rnd];
-            choiceArray[rnd] = choiceArray[i];
-            choiceArray[i] = tempString;
+            isWait = false;
 
-            if(rnd == keyIndex)
+            choiceArray = new string[] { questions[currentQuestion].choice1, questions[currentQuestion].choice2, questions[currentQuestion].choice3, questions[currentQuestion].choice4 };
+            keyIndex = questions[currentQuestion].key - 1;
+
+            for (int i = 0; i < choiceArray.Length-1; i++)
             {
-                keyIndex = i;
-            }else if(i == keyIndex)
-            {
-                keyIndex = rnd;
+                int rnd = Random.Range(i, choiceArray.Length);
+                tempString = choiceArray[rnd];
+                choiceArray[rnd] = choiceArray[i];
+                choiceArray[i] = tempString;
+
+                if(rnd == keyIndex)
+                {
+                    keyIndex = i;
+                }else if(i == keyIndex)
+                {
+                    keyIndex = rnd;
+                }
             }
-        }
 
-        if (currentQuestion < questions.Count)
-        {
-            questionNumber.text = questions[currentQuestion].questionNumber.ToString();
+            questionNumber.text = (currentQuestion+1).ToString();
 
             choice1_Button.GetComponent<Image>().color = defaultButtonColor;
             choice2_Button.GetComponent<Image>().color = defaultButtonColor;
