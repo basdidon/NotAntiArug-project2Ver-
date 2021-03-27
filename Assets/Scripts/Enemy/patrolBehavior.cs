@@ -16,6 +16,8 @@ public class patrolBehavior : MonoBehaviour
     private bool isFacingLeft = true;
 
     public float speed = 0f;
+    public float offset = 0.2f;
+    
 
     public LayerMask whatIsGround;
 
@@ -27,9 +29,14 @@ public class patrolBehavior : MonoBehaviour
 
     void Update()
     {
-        groundCheckerOriginLeft = boxCollider2d.bounds.center + new Vector3(-0.8f, -0.5f, 0);
-        groundCheckerOriginRight = boxCollider2d.bounds.center + new Vector3(0.8f, -0.5f, 0);
+        //set origin & Direction of groundChecker
+        groundCheckerOriginLeft = boxCollider2d.bounds.center + new Vector3(-(boxCollider2d.bounds.extents.x + offset), -(boxCollider2d.bounds.extents.y - offset), 0);
+        groundCheckerOriginRight = boxCollider2d.bounds.center + new Vector3(boxCollider2d.bounds.extents.x + offset, -(boxCollider2d.bounds.extents.y - offset), 0);
         groundCheckerDirection = Vector2.down * (boxCollider2d.bounds.extents.y);
+
+        //set origin & Direction of otherEnemyChecker
+        
+
 
 
         if (!Physics2D.Raycast(groundCheckerOriginLeft, Vector2.down, boxCollider2d.bounds.extents.y))

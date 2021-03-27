@@ -7,7 +7,7 @@ public class Save
 {
     public float playerPosX;
     public float playerPosY;
-    public int playerHp;
+    public float playerHp;
     
     public int currentBullet_0 = 0;
     public int currentBullet_1 = 0;

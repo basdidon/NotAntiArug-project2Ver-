@@ -2,9 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName ="New Enemy",menuName ="Enemy",order =1)]
 public class ScriptableEnemy : ScriptableObject
 {
+    public enum EnemyName
+    {
+        none,
+        Alcohol,
+        Glue,
+        Opium,
+        Amphetamine,
+        Cocaine,
+        Ecstasy,
+        Mitragynine,
+        MagicMushroom
+    }
+
     public enum EffectType
     {
         depressants,
@@ -13,11 +26,12 @@ public class ScriptableEnemy : ScriptableObject
         multipleEffect
     }
 
-    public string enemyName;
-    [TextArea(1,5)]
-    public string enemyDescription;
-
-    public Sprite enemySprite;
-
+    public EnemyName enemyName;
     public EffectType effectType;
+    public float enemyHp;
+    public float enemyDamage;
+    public int scoreReward;
+    [TextArea(1,5)] public string enemyDescription;
+
+    
 }

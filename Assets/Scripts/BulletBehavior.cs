@@ -34,19 +34,19 @@ public class BulletBehavior : MonoBehaviour
             {
                 OnHitEnemy(collision);
             }
-            else if (bulletsType == Bullets.BulletsType.antiDepressants && collision.GetComponent<Enemy>().enemiesEffectType == Enemy.EnemiesEffectType.depressants)
+            else if (bulletsType == Bullets.BulletsType.antiDepressants && collision.GetComponent<Enemy>().scriptableEnemy.effectType == ScriptableEnemy.EffectType.depressants)
             {
                 OnHitEnemy(collision);
             }
-            else if (bulletsType == Bullets.BulletsType.antiHallucinogens && collision.GetComponent<Enemy>().enemiesEffectType == Enemy.EnemiesEffectType.hallucinogens)
+            else if (bulletsType == Bullets.BulletsType.antiHallucinogens && collision.GetComponent<Enemy>().scriptableEnemy.effectType == ScriptableEnemy.EffectType.hallucinogens)
             {
                 OnHitEnemy(collision);
             }
-            else if (bulletsType == Bullets.BulletsType.antiStimulants && collision.GetComponent<Enemy>().enemiesEffectType == Enemy.EnemiesEffectType.stimulants)
+            else if (bulletsType == Bullets.BulletsType.antiStimulants && collision.GetComponent<Enemy>().scriptableEnemy.effectType == ScriptableEnemy.EffectType.stimulants)
             {
                 OnHitEnemy(collision);
             }
-            else if (bulletsType == Bullets.BulletsType.antiMultipleEffect && collision.GetComponent<Enemy>().enemiesEffectType == Enemy.EnemiesEffectType.multipleEffect)
+            else if (bulletsType == Bullets.BulletsType.antiMultipleEffect && collision.GetComponent<Enemy>().scriptableEnemy.effectType == ScriptableEnemy.EffectType.multipleEffect)
             {
                 OnHitEnemy(collision);
             }

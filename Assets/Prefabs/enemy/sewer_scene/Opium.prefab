@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7241164393517212568}
   - component: {fileID: -5837787895646300852}
   - component: {fileID: -118104629174108192}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Opium
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -142,12 +142,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3113631250680322229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edc0b01be7613d54490845aab6d6ccfa, type: 3}
+  m_Script: {fileID: 11500000, guid: a13e22ca0231c994d9b14e91226879b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyHP: 3
-  enemies: 3
-  enemiesEffectType: 0
+  scriptableEnemy: {fileID: 11400000, guid: de3055536d0ea184590560f5126813a9, type: 2}
   itemDrop: {fileID: 0}
 --- !u!114 &7241164393517212568
 MonoBehaviour:
@@ -162,9 +160,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  offset: 0.2
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!114 &-5837787895646300852
 MonoBehaviour:
   m_ObjectHideFlags: 0

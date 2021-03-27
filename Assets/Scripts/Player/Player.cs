@@ -9,8 +9,8 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRendererPlayer;
     public Animator anim;
 
-    public int maxHP;
-    public int currentHP;
+    public float maxHP;
+    public float currentHP;
 
     public float invincibleLength;
     public float invincibleCounter;
@@ -44,11 +44,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void dealDamage(int damage)
+    public void dealDamage(float damage)
     {
         if (invincibleCounter <= 0)
         {
             currentHP = currentHP - damage;
+            FindObjectOfType<HPbarUI>().updateHpUI();
 
             if (currentHP <= 0)
             {
@@ -72,7 +73,7 @@ public class Player : MonoBehaviour
         }
     }
     
-    public void healDamage(int heal)
+    public void healDamage(float heal)
     {
         currentHP += heal;
         if (currentHP > maxHP)

@@ -16,15 +16,14 @@ public class spawnEnemy : MonoBehaviour
     public GameObject Mitragynine;
     public GameObject MagicMushroom;
 
-    public Enemy.Enemies[] enemiesToSpawnLvl_01 = {
-        Enemy.Enemies.Alcohol,    Enemy.Enemies.Alcohol,    Enemy.Enemies.Alcohol,    Enemy.Enemies.Alcohol,    Enemy.Enemies.Alcohol,    Enemy.Enemies.Alcohol,    Enemy.Enemies.Alcohol,
-        Enemy.Enemies.Glue,       Enemy.Enemies.Glue,       Enemy.Enemies.Glue,       Enemy.Enemies.Glue,       Enemy.Enemies.Glue,       Enemy.Enemies.Glue,       Enemy.Enemies.Glue,
-        Enemy.Enemies.Opium,      Enemy.Enemies.Opium,      Enemy.Enemies.Opium,      Enemy.Enemies.Opium,      Enemy.Enemies.Opium,      Enemy.Enemies.Opium
+    public ScriptableEnemy.EnemyName[] enemiesToSpawnLvl_01 = {
+        ScriptableEnemy.EnemyName.Alcohol,    ScriptableEnemy.EnemyName.Alcohol,    ScriptableEnemy.EnemyName.Alcohol,    ScriptableEnemy.EnemyName.Alcohol,    ScriptableEnemy.EnemyName.Alcohol,    ScriptableEnemy.EnemyName.Alcohol,    ScriptableEnemy.EnemyName.Alcohol,  ScriptableEnemy.EnemyName.Alcohol,  ScriptableEnemy.EnemyName.Alcohol,  ScriptableEnemy.EnemyName.Alcohol,
+        ScriptableEnemy.EnemyName.Glue,       ScriptableEnemy.EnemyName.Glue,       ScriptableEnemy.EnemyName.Glue,       ScriptableEnemy.EnemyName.Glue,       ScriptableEnemy.EnemyName.Glue,       ScriptableEnemy.EnemyName.Glue,       ScriptableEnemy.EnemyName.Glue,     ScriptableEnemy.EnemyName.Glue,     ScriptableEnemy.EnemyName.Glue,     ScriptableEnemy.EnemyName.Glue, 
+        ScriptableEnemy.EnemyName.Opium,      ScriptableEnemy.EnemyName.Opium,      ScriptableEnemy.EnemyName.Opium,      ScriptableEnemy.EnemyName.Opium,      ScriptableEnemy.EnemyName.Opium,      ScriptableEnemy.EnemyName.Opium,      ScriptableEnemy.EnemyName.Opium,    ScriptableEnemy.EnemyName.Opium,    ScriptableEnemy.EnemyName.Opium,
         };
 
     private void Start()
     {
-        
         RandomSpawnEnemy();
         Debug.Log("num of spawnPoint = " + enemiesToSpawnLvl_01.Length);
     }
@@ -34,11 +33,12 @@ public class spawnEnemy : MonoBehaviour
     {
         
         if (currentLv == 1){
+            Debug.Log("sss "+ enemiesToSpawnLvl_01.Length+" "+ enemySpawnPoint.Length);
             //Reorder enemyList
             for (int i = 0; i < enemiesToSpawnLvl_01.Length - 1; i++)
             {
                 int rnd = Random.Range(i, enemiesToSpawnLvl_01.Length-1);
-                Enemy.Enemies tempEnemyIdToSpawn = enemiesToSpawnLvl_01[rnd];
+                ScriptableEnemy.EnemyName tempEnemyIdToSpawn = enemiesToSpawnLvl_01[rnd];
                 enemiesToSpawnLvl_01[rnd] = enemiesToSpawnLvl_01[i];
                 enemiesToSpawnLvl_01[i] = tempEnemyIdToSpawn;
             }
@@ -48,16 +48,16 @@ public class spawnEnemy : MonoBehaviour
             enemiesToSpawnLvl_01[enemySpawnPoint.Length - 2] = 0;
             enemiesToSpawnLvl_01[enemySpawnPoint.Length - 1] = 0;
 
-            for (int i = 0; i < enemiesToSpawnLvl_01.Length; i++)
+            /*for (int i = 0; i < enemiesToSpawnLvl_01.Length; i++)
             {
                 Debug.Log("enemiesToSpawnLvl_01 " + i + " : " + enemiesToSpawnLvl_01[i]);
-            }
+            }*/
 
             //reorder enemylist again
             for (int i = 0; i < enemySpawnPoint.Length - 1; i++)
             {
                 int rnd = Random.Range(i, enemiesToSpawnLvl_01.Length);
-                Enemy.Enemies tempEnemyIdToSpawn = enemiesToSpawnLvl_01[rnd];
+                ScriptableEnemy.EnemyName tempEnemyIdToSpawn = enemiesToSpawnLvl_01[rnd];
                 enemiesToSpawnLvl_01[rnd] = enemiesToSpawnLvl_01[i];
                 enemiesToSpawnLvl_01[i] = tempEnemyIdToSpawn;
 
@@ -66,29 +66,29 @@ public class spawnEnemy : MonoBehaviour
                 {
                     case 0:
                         break;
-                    case Enemy.Enemies.Alcohol:
+                    case ScriptableEnemy.EnemyName.Alcohol:
                         Instantiate(Alcohol, enemySpawnPoint[i].position, Quaternion.identity);
                         Debug.Log("spawn : Alcohol ");
                         break;
-                    case Enemy.Enemies.Glue:
+                    case ScriptableEnemy.EnemyName.Glue:
                         Instantiate(Glue, enemySpawnPoint[i].position, Quaternion.identity);
                         break;
-                    case Enemy.Enemies.Opium:
+                    case ScriptableEnemy.EnemyName.Opium:
                         Instantiate(Opium, enemySpawnPoint[i].position, Quaternion.identity);
                         break;
-                    case Enemy.Enemies.Amphetamine:
+                    case ScriptableEnemy.EnemyName.Amphetamine:
                         Instantiate(Amphetamine, enemySpawnPoint[i].position, Quaternion.identity);
                         break;
-                    case Enemy.Enemies.Cocaine:
+                    case ScriptableEnemy.EnemyName.Cocaine:
                         Instantiate(Cocaine, enemySpawnPoint[i].position, Quaternion.identity);
                         break;
-                    case Enemy.Enemies.Ecstasy:
+                    case ScriptableEnemy.EnemyName.Ecstasy:
                         Instantiate(Ecstasy, enemySpawnPoint[i].position, Quaternion.identity);
                         break;
-                    case Enemy.Enemies.Mitragynine:
+                    case ScriptableEnemy.EnemyName.Mitragynine:
                         Instantiate(Mitragynine, enemySpawnPoint[i].position, Quaternion.identity);
                         break;
-                    case Enemy.Enemies.MagicMushroom:
+                    case ScriptableEnemy.EnemyName.MagicMushroom:
                         Instantiate(MagicMushroom, enemySpawnPoint[i].position, Quaternion.identity);
                         break;
                     default:
