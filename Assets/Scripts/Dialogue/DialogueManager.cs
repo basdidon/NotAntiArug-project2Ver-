@@ -6,11 +6,10 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager instance;
-
-    public List<Dialogue> dialogues;
     
-    public Queue<Dialogue.Speaker> speakers;
-    public Queue<string> sentences;
+    public Queue<Dialogue> dialogues;
+
+    public Dialogue dialogue;
 
     public bool isTalking = false;
 
@@ -19,6 +18,8 @@ public class DialogueManager : MonoBehaviour
     public Text NameText;
     public Text dialogText;
     public Image speakerImage;
+    public GameObject insertImageBox;
+    public Image insertImage;
 
     [Header("Sprite")]
     public Sprite PlayerSprite, DoctorSprite, Boss1Sprite, Boss2Sprite, Boss3Sprite;
@@ -27,11 +28,10 @@ public class DialogueManager : MonoBehaviour
     {
         instance = this;
 
-        sentences = new Queue<string>();
-        speakers = new Queue<Dialogue.Speaker>();
+        dialogues = new Queue<Dialogue>();
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(List<Dialogue> dialogues)
     {
         isTalking = true;
         //Debug.Log("Starting conversation with "+dialogue.speaker.ToString());
@@ -41,28 +41,28 @@ public class DialogueManager : MonoBehaviour
 
         //NameText.text = dialogue.speaker.ToString();
 
-        foreach(Dialogue.Speaker speaker in dialogue.speaker)
+        foreach(Dialogue sentance in dialogues)
         {
-            speakers.Enqueue(speaker);
-        }
-
-        foreach(string sentence in dialogue.sentences)
-        {
-            sentences.Enqueue(sentence);
+            this.dialogues.Enqueue(sentance);
         }
     }
 
     public void DisplayNextSentence()
     {
-        Debug.Log("DisplayNextSentence : " + sentences.Count + "," + speakers.Count);
-        if (sentences.Count == 0 || speakers.Count == 0)
+        Debug.Log("DisplayNextSentence : " + dialogues.Count + "," + dialogues.Count);
+        if (dialogues.Count == 0)
         {
             EndDialogue();
         }
-        //set name on UI
-        NameText.text = Dialogue.inGameNameSpeaker[speakers.Peek().GetHashCode()];
         
-        switch (speakers.Dequeue())
+        //
+        dialogue = dialogues.Dequeue();
+        
+        //set name on UI
+        NameText.text = Dialogue.inGameNameSpeaker[dialogue.speaker.GetHashCode()];
+        
+        //set speakerImage on UI
+        switch (dialogue.speaker)
         {
             case Dialogue.Speaker.player:
                 speakerImage.sprite = PlayerSprite;
@@ -81,9 +81,20 @@ public class DialogueManager : MonoBehaviour
                 break;
         }
 
-        string sentence = sentences.Dequeue();
-        dialogText.text = sentence;
-        Debug.Log(sentence);
+        //set dialogText on UI
+        dialogText.text = dialogue.quote;
+        Debug.Log(dialogue.quote);
+
+        //set insertImage on UI
+        if(dialogue.insertImage == null)
+        {
+            insertImageBox.gameObject.SetActive(false);
+        }
+        else
+        {
+            insertImageBox.gameObject.SetActive(true);
+            insertImage.sprite = dialogue.insertImage;
+        }
     }
 
     public void EndDialogue()

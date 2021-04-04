@@ -15,8 +15,6 @@ public class Dialogue
         Boss3,
     }
 
-    public Speaker[] speaker;
-
     public static string[] inGameNameSpeaker = {
         "น็อต",
         "ด็อกเตอร์",
@@ -24,7 +22,11 @@ public class Dialogue
         "บอส2",
         "บอส3" 
     };
-
+    
+    public Speaker speaker;
+    
     [TextArea(3,5)]
-    public string[] sentences;
+    public string quote;
+
+    public Sprite insertImage;
 }

@@ -15,6 +15,13 @@ public class Player : MonoBehaviour
     public float invincibleLength;
     public float invincibleCounter;
 
+    public float flashingDuration;
+    public float flashingCounter;
+    public bool isFlashed = false;
+
+    public Color NormalColor;
+    public Color FlashColor;
+
     public int scoreToReduce = 100;
     
     void Awake()
@@ -29,6 +36,9 @@ public class Player : MonoBehaviour
 
         spriteRendererPlayer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+
+        NormalColor = new Color(spriteRendererPlayer.color.r, spriteRendererPlayer.color.g, spriteRendererPlayer.color.b, 1f);
+        FlashColor = new Color(spriteRendererPlayer.color.r, spriteRendererPlayer.color.g, spriteRendererPlayer.color.b, 0.5f);
     }
 
     void Update()
@@ -36,16 +46,33 @@ public class Player : MonoBehaviour
         if (invincibleCounter > 0)
         {
             invincibleCounter -= Time.deltaTime;
+            flashingCounter -= Time.deltaTime;
+
+            if(flashingCounter <= 0)
+            {
+                flashingCounter = flashingDuration;
+
+                if (isFlashed == true) {
+                    spriteRendererPlayer.color = NormalColor;
+                    isFlashed = false;
+                }
+                else
+                {
+                    spriteRendererPlayer.color = FlashColor;
+                    isFlashed = true;
+                }
+            }
 
             if(invincibleCounter <= 0)
             {
-                spriteRendererPlayer.color = new Color(spriteRendererPlayer.color.r, spriteRendererPlayer.color.g, spriteRendererPlayer.color.b, 1f);
+                spriteRendererPlayer.color = NormalColor;
             }
         }
     }
 
     public void dealDamage(float damage)
     {
+
         if (invincibleCounter <= 0)
         {
             currentHP = currentHP - damage;
@@ -56,7 +83,7 @@ public class Player : MonoBehaviour
                 FindObjectOfType<scoreManager>().reduceScore(scoreToReduce);
                 //death
                 //Debug.Log("death");
-                anim.SetTrigger("Dead");
+                anim.SetTrigger("deadTrigger");
 
                 LevelManager.instance.RespawnPlayer();
             }
@@ -67,7 +94,7 @@ public class Player : MonoBehaviour
 
                 //invincible state
                 invincibleCounter = invincibleLength;
-                spriteRendererPlayer.color = new Color(spriteRendererPlayer.color.r, spriteRendererPlayer.color.g, spriteRendererPlayer.color.b, 0.5f);
+                //
                 
             }
         }
@@ -80,6 +107,6 @@ public class Player : MonoBehaviour
         {
             currentHP = maxHP;
         }
-
+        FindObjectOfType<HPbarUI>().updateHpUI();
     }
 }

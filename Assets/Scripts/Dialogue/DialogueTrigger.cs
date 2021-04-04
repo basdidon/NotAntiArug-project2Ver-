@@ -7,7 +7,7 @@ public class DialogueTrigger : MonoBehaviour
 {
     public GameObject talkIcon;
 
-    public Dialogue dialogue;
+    public List<Dialogue> dialogues;
     public bool isPlayerInRange;
 
     private void Update()
@@ -16,7 +16,7 @@ public class DialogueTrigger : MonoBehaviour
         {
             if (DialogueManager.instance.isTalking == false)
             {
-                FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogues);
             }
 
             FindObjectOfType<DialogueManager>().DisplayNextSentence();

@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     public int i;
 
     [Header("knockback variable")]
-    public float knockbackTime = 0.3f;
+    public float knockbackTime = 0.5f;
     public float knockbackTimeCounter;
     [SerializeField] private float knockbackPwr = 7f;
 
@@ -56,18 +56,19 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
         isGround = Physics2D.OverlapCircle(groundCheckpoint.position, 0.2f, whatIsGround);
         
         if (isGround)
         {
-            anim.SetBool("isGround", true);
+            anim.SetBool("isGrounded", true);
             isCanDoubleJump = true;
         }
         else
         {
-            anim.SetBool("isGround", false);
+            anim.SetBool("isGrounded", false);
         }
-        
+ 
         //jump
         if (Input.GetButtonDown("Jump") /*&& jumpcount < maxJump && nextJump < Time.time*/)
         {
@@ -78,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && nextFire < Time.time)
         {
             shoot();
-            anim.SetTrigger("Shoot");
+            anim.SetTrigger("shootTrigger");
         }
 
         //change bullets
@@ -98,33 +99,35 @@ public class PlayerMovement : MonoBehaviour
     {
         if (knockbackTimeCounter <= 0)
         {
+            anim.SetBool("isHurt", false);
             //horizontal move
             moveHorizontal = Input.GetAxis("Horizontal");
             //vetacal aim
             aimVertical = Input.GetAxis("Vertical");
 
-            playerRigidbody2d.velocity = new Vector2(moveHorizontal*speed,playerRigidbody2d.velocity.y) ;
+            playerRigidbody2d.velocity = new Vector2(moveHorizontal* speed, playerRigidbody2d.velocity.y) ;
 
             //facing handle
             if (moveHorizontal < 0)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
                 isTurnRight = false;
-                anim.SetFloat("moveSpeed", 1f);
+                anim.SetBool("isRunning", true);
             }
             else if (moveHorizontal > 0)
             {
                 transform.localScale = new Vector3(1, 1, 1);
                 isTurnRight = true;
-                anim.SetFloat("moveSpeed", 1f);
+                anim.SetBool("isRunning", true);
             }
             else
             {
-                anim.SetFloat("moveSpeed", 0f);
+                anim.SetBool("isRunning", false);
             }
         }
         else
         {
+            anim.SetBool("isHurt", true);
             knockbackTimeCounter -= Time.deltaTime;
             if (isTurnRight)
             {

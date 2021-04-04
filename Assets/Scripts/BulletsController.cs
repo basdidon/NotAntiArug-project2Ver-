@@ -16,8 +16,5 @@ public class BulletsController : MonoBehaviour
 
         bullets.Add(new Bullets(Bullets.BulletsType.antiDepressants, "สลายยาเสพติดประเภท 1", 20, 1, "best bullet forever", sprites[0], bulletsPrefab[1]));
         bullets.Add(new Bullets(Bullets.BulletsType.antiHallucinogens, "สลายยาเสพติดประเภท 2", 20, 1, "boom", sprites[1], bulletsPrefab[2]));
-
-        Debug.Log(bullets[0].bulletsName);
-        Debug.Log(bullets[1].bulletsName);
     }
 }
