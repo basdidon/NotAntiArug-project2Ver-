@@ -12,8 +12,6 @@ public class PauseGameScript : MonoBehaviour
 
     public string mainmenuScene;
 
-   
-
     // Update is called once per frame
     void Update()
     {

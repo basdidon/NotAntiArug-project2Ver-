@@ -28,10 +28,7 @@ public class ScriptableEnemy : ScriptableObject
 
     public EnemyName enemyName;
     public EffectType effectType;
-    public float enemyHp;
+    public float enemyMaxHp;
     public float enemyDamage;
     public int scoreReward;
-    [TextArea(1,5)] public string enemyDescription;
-
-    
 }

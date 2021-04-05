@@ -46,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
     public float knockbackTimeCounter;
     [SerializeField] private float knockbackPwr = 7f;
 
-
     void Start()
     {
         instance = this;
@@ -68,31 +67,37 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("isGrounded", false);
         }
- 
-        //jump
-        if (Input.GetButtonDown("Jump") /*&& jumpcount < maxJump && nextJump < Time.time*/)
-        {
-            jump();
-        }
 
-        //shoot
-        if (Input.GetButtonDown("Fire1") && nextFire < Time.time)
+        if (FindObjectOfType<PauseGameScript>().isPause)
         {
-            shoot();
-            anim.SetTrigger("shootTrigger");
+            //do nothing
         }
-
-        //change bullets
-        if (Input.GetButtonDown("Fire2"))
+        else
         {
-            changeBullets();
-        }
+            //jump
+            if (Input.GetButtonDown("Jump") /*&& jumpcount < maxJump && nextJump < Time.time*/)
+            {
+                jump();
+            }
 
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            knockback();
-        }
+            //shoot
+            if (Input.GetButtonDown("Fire1") && nextFire < Time.time)
+            {
+                shoot();
+                anim.SetTrigger("shootTrigger");
+            }
 
+            //change bullets
+            if (Input.GetButtonDown("Fire2"))
+            {
+                changeBullets();
+            }
+
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                knockback();
+            }
+        }
     }
 
     void FixedUpdate()

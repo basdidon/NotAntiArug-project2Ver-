@@ -22,6 +22,8 @@ public class BulletsUI : MonoBehaviour
     void Update()
     {
         i = PlayerMovement.instance.currentBulletsID-1;
+
+        Debug.Log(i);
         //***Update UI***
         //UIsprites
         switch (PlayerMovement.instance.currentBulletsID)

@@ -9,7 +9,7 @@ public class Menu : MonoBehaviour
 {
     public string startScene;
 
-    public GameObject CreditCanvas;
+    //ublic GameObject CreditCanvas;
 
 
     public void StartGame()
@@ -20,12 +20,12 @@ public class Menu : MonoBehaviour
 
     public void OpenCredit()
     {
-        CreditCanvas.SetActive(true);
+        //CreditCanvas.SetActive(true);
     }
 
     public void CloseCredit()
     {
-        CreditCanvas.SetActive(false);
+        //CreditCanvas.SetActive(false);
     }
 
     public void QuitGame()

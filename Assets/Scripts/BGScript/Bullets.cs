@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//[System.Serializable]
+[System.Serializable]
 public class Bullets
 {
     //public static Bullets instance;
@@ -35,4 +35,5 @@ public class Bullets
         sprite = newSprite;
         bulletPrefab = newBulletPrefab;
     }
+   
 }

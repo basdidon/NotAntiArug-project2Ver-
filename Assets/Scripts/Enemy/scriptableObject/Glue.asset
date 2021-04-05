@@ -15,6 +15,7 @@ MonoBehaviour:
   enemyName: 2
   effectType: 0
   enemyHp: 20
+  enemyMaxHp: 20
   enemyDamage: 20
   scoreReward: 100
   enemyDescription: 
