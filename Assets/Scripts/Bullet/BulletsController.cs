@@ -24,8 +24,8 @@ public class BulletsController : MonoBehaviour
         instance = this;
 
         //Bullets antiAll = new Bullets();
-        antiDepressants = new Bullets(Bullets.BulletsType.antiDepressants, "สลายยาเสพติดประเภท 1", 20, 1, "best bullet forever", sprites[0], bulletsPrefab[1]);
-        antiHallucinogens = new Bullets(Bullets.BulletsType.antiHallucinogens, "สลายยาเสพติดประเภท 2", 20, 1, "boom", sprites[1], bulletsPrefab[2]);
+        antiDepressants = new Bullets(Bullets.BulletsType.antiDepressants, "สลายยาเสพติดประเภท 1", 50, 5, "best bullet forever", sprites[0], bulletsPrefab[1]);
+        antiHallucinogens = new Bullets(Bullets.BulletsType.antiHallucinogens, "สลายยาเสพติดประเภท 2", 20, 5, "boom", sprites[1], bulletsPrefab[2]);
         //Bullets antiStimulants = new Bullets();
         //Bullets antiMultipleEffect = new Bullets();
 

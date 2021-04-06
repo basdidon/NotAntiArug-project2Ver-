@@ -7,27 +7,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class Menu : MonoBehaviour
 {
-    public string startScene;
-
-    //ublic GameObject CreditCanvas;
-
-
-    public void StartGame()
-    {
-        SceneManager.LoadScene(startScene);
-        scoreManager.currentScore = 0;
-    }
-
-    public void OpenCredit()
-    {
-        //CreditCanvas.SetActive(true);
-    }
-
-    public void CloseCredit()
-    {
-        //CreditCanvas.SetActive(false);
-    }
-
     public void QuitGame()
     {
         Application.Quit();

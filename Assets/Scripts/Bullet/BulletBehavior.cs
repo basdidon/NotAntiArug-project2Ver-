@@ -13,8 +13,7 @@ public class BulletBehavior : MonoBehaviour
     [SerializeField]
     private Rigidbody2D bulletRigidbody;
 
-    [SerializeField]
-    private int bulletDamage = 2;
+    public int bulletDamage = 2;
     
     void Start()
     {
@@ -25,6 +24,8 @@ public class BulletBehavior : MonoBehaviour
     {
         bulletRigidbody.velocity = direction * bulletSpeed;
     }
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
