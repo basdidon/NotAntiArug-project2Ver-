@@ -12,6 +12,12 @@ public class PauseGameScript : MonoBehaviour
 
     public string mainmenuScene;
 
+    private void Start()
+    {
+        isPause = false;
+        Time.timeScale = 1f;
+    }
+
     // Update is called once per frame
     void Update()
     {

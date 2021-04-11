@@ -6,10 +6,15 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
+    public static bool isLoadGameSave;
+
     private Checkpoint[] checkpoints;
 
     public Vector3 spawnPoint;
     private float waitToRespawn = 2;
+
+    public int[] enemyToLoad_Index;
+    public Vector2[] enemyToLoad_Position;
 
     public int currentLv;
     public Transform[] enemySpawnPoint;
@@ -40,8 +45,16 @@ public class LevelManager : MonoBehaviour
 
         spawnPoint = Player.instance.transform.position;
 
-        RandomSpawnEnemy();
-        Debug.Log("num of spawnPoint = " + enemiesToSpawnLvl_01.Length);
+        if (isLoadGameSave)
+        {
+            LoadSavedEnemy();
+        }
+        else
+        {
+            RandomSpawnEnemy();
+            Debug.Log("num of spawnPoint = " + enemiesToSpawnLvl_01.Length);
+        }
+        
     }
 
     public void RespawnPlayer()
@@ -59,10 +72,8 @@ public class LevelManager : MonoBehaviour
         Player.instance.currentHP = Player.instance.maxHP;
         Player.instance.transform.position = spawnPoint;
         FindObjectOfType<HPbarUI>().updateHpUI();
+        FindObjectOfType<BulletsUI>().updateBulletUI();
     }
-
-
-
 
     public void DeactiveCheckPoint()
     {
@@ -149,4 +160,9 @@ public class LevelManager : MonoBehaviour
         }
     }
     #endregion
+
+    public void LoadSavedEnemy()
+    {
+        
+    }
 }

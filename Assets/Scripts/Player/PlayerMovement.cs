@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator anim;
 
+    [Header("static value")]
+    public static Vector2 playerStartPosition;
+
     [Header("object variable")]
     public GameObject bulletPrefab;
     public Rigidbody2D playerRigidbody2d;
@@ -51,11 +54,15 @@ public class PlayerMovement : MonoBehaviour
         instance = this;
         playerRigidbody2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        if (LevelManager.isLoadGameSave)
+        {
+            this.transform.position = playerStartPosition;
+            Debug.Log("playerStartPosition : " + playerStartPosition);
+        }     
     }
 
     void Update()
     {
-
         isGround = Physics2D.OverlapCircle(groundCheckpoint.position, 0.2f, whatIsGround);
         
         if (isGround)
@@ -218,7 +225,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             bulletInstance.GetComponent<BulletBehavior>().bulletDamage = BulletsController.instance.bullets[i].damagePower;
-
+            BulletsUI.instance.updateBulletUI();
             nextFire = Time.time + fireRate;
         }
     }
@@ -231,6 +238,7 @@ public class PlayerMovement : MonoBehaviour
         {
             currentBulletsID = 1;
         }
+        BulletsUI.instance.updateBulletUI();
         Debug.Log("PlayerMovement change bullets to :" + currentBulletsID + " / " + BulletsController.instance.bullets.Count);
     }
 
@@ -240,4 +248,3 @@ public class PlayerMovement : MonoBehaviour
         playerRigidbody2d.velocity = new Vector2(0f, knockbackPwr);
     }
 }
-
