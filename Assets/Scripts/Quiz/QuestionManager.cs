@@ -37,6 +37,8 @@ public class QuestionManager : MonoBehaviour
     public List<Question> questions = new List<Question>();
     public List<Question> shuffledQuestions = new List<Question>();
 
+    public int questionLevel = 0;
+
     public Question tempQuestion;
     public string tempString;
     public int keyIndex;
@@ -46,6 +48,7 @@ public class QuestionManager : MonoBehaviour
     public int questionAmount = 2;
 
     [SerializeField] private float time = 120f;
+    [SerializeField] private float timeToNotice = 30;
     [SerializeField] private int timeLeft;
 
     public int scoreToAdd = 100;
@@ -57,13 +60,19 @@ public class QuestionManager : MonoBehaviour
     {
         instance = this;
 
-        questions.Add(new Question("ยาเสพติดประเภทที่ 1 เป็นยาเสพติดออกฤทธิ์อย่างไร", "กดประสาท", "หลอนประสาท", "กระตุ้นประสาท", "ผสมผสาน", 1, 100));
-        questions.Add(new Question("ยาเสพติดประเภทกดประสาทส่งผล", "ยาบ้า", "เหล้า", "บุหรี่", "ยาอี", 2, 100));
-        questions.Add(new Question("1+1 = ?", "1", "2", "3", "4",1,100));
-        questions.Add(new Question("2+2 = ?", "1", "2", "3", "4", 4, 100));
-        questions.Add(new Question("3+3 = ?", "2", "3", "5", "6", 4, 100));
+        if(questionLevel == 0)
+        {
+            Debug.Log("choose (int)questionLevel 1-3");
+        }
 
-        for(int i = 0; i < questions.Count; i++)
+        questions.Add(new Question("สารเสพติดประเภทกดประสาทได้แก่อะไรบ้าง?", "ยาบ้า กาว", "เห็ดขี้ควาย แอลเอสดี", "กาว ฝิ่น", "ช่อดอกกัญชา กาว", 3, 100));
+        questions.Add(new Question("อาการของคนเสพสารเสพติดประเภทกดประสาทมีอาการอย่างไร?", "ร่าเริง ช่างพูด", "อ่อนเพลีย ฟุ้งซ่าน", "หงุดหงิด คลุ้มคลั่ง", "ถูกทุกข้อ",2 , 100));
+        questions.Add(new Question("กาว และเหล้าเป็นสารเสพติดออกฤทธิ์อย่างไร?", "กดประสาท", "กระตุ้นประสาท", "ผสมผสาน", "หลอนประสาท", 1,100));
+        questions.Add(new Question("กาว ฝิ่น ยาบ้า อะไรไม่ใช่สารเสพติดประเภทกดประสาท?", "กาว", "ฝิ่น", "ไม่ใช่ทั้ง ก และ ข", "ไม่มีข้อถูก", 4, 100));
+        questions.Add(new Question("เฮโรอีน จัดเป็นสารเสพติดที่สอดคล้องกับข้อใด?", "เป็นสารเสพติดประเภทที่ 1", "เป็นสารเสพติดประเภทที่ 2", "เป็นสารเสพติดประเภทที่ 3", "เป็นสารเสพติดประเภทที่ 4", 1, 100));
+        questions.Add(new Question("ฝิ่นออกฤทธิ์ต่อร่างกายอย่างไร?", "กดประสาท", "กระตุ้นประสาท", "ผสมผสาน", "หลอนประสาท", 4, 100));
+
+        for (int i = 0; i < questions.Count; i++)
         {
             int rnd = Random.Range(i, questions.Count);
             tempQuestion = questions[rnd];
@@ -113,6 +122,9 @@ public class QuestionManager : MonoBehaviour
         if (timeLeft <= 0)
         {
             EndQuiz();
+        } else if (timeLeft <= timeToNotice)
+        {
+            AudioManager.instance.PlaySfx(2);
         }
     }
 
@@ -185,6 +197,7 @@ public class QuestionManager : MonoBehaviour
         if(answer == keyIndex)
         {
             Debug.Log("correct answer");
+            AudioManager.instance.PlaySfx(0);
             //show icon
             correctIcon.SetActive(true);
             //add score
@@ -212,6 +225,7 @@ public class QuestionManager : MonoBehaviour
         {
             //redure score
             FindObjectOfType<scoreManager>().reduceScore(scoreToRedure);
+            AudioManager.instance.PlaySfx(1);
             //show icon
             incorrectIcon.SetActive(true);
             //show right answer

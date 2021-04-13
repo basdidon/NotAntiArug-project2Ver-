@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -29,6 +30,29 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuCanvas.gameObject.SetActive(false);
         creditCanvas.gameObject.SetActive(true);
+    }
+
+    public void BackToTitle()
+    {
+        mainMenuCanvas.gameObject.SetActive(true);
+        levelSelectCanvas.gameObject.SetActive(false);
+        scoreBoardCanvas.gameObject.SetActive(false);
+        creditCanvas.gameObject.SetActive(false);
+    }
+
+    public void StartLevel_01()
+    {
+        SceneManager.LoadScene(scene_01);
+    }
+
+    public void StartLevel_02()
+    {
+        SceneManager.LoadScene(scene_02);
+    }
+
+    public void StartLevel_03()
+    {
+        SceneManager.LoadScene(scene_03);
     }
 
     public void QuitGame()

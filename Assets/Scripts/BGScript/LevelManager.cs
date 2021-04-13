@@ -58,6 +58,7 @@ public class LevelManager : MonoBehaviour
         Player.instance.gameObject.SetActive(true);
         Player.instance.currentHP = Player.instance.maxHP;
         Player.instance.transform.position = spawnPoint;
+        AudioManager.instance.PlaySfx(7);
         FindObjectOfType<HPbarUI>().updateHpUI();
     }
 
