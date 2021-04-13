@@ -17,7 +17,6 @@ public class ScriptableEnemy : ScriptableObject
         Mitragynine,
         MagicMushroom
     }
-
     public enum EffectType
     {
         depressants,
