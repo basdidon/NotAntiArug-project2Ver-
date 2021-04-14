@@ -48,9 +48,13 @@ public class QuestionManager : MonoBehaviour
     public int questionAmount = 2;
 
     [SerializeField] private float time = 120f;
+<<<<<<< HEAD
     [SerializeField] private float timeToNotice = 30;
     [SerializeField] private float timeLeft;
     private int timeLeftToDisplay;
+=======
+    [SerializeField] private int timeLeft;
+>>>>>>> parent of aedc43d (- save)
 
     public int scoreToAdd = 100;
     public int scoreToRedure = 100;
@@ -116,11 +120,9 @@ public class QuestionManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        timeLeft = (timeLeft-Time.deltaTime);
+        timeLeft = (int)(time-Time.time);
 
-        timeLeftToDisplay = (int)timeLeft;
-
-        timeLeft_Text.text = timeLeftToDisplay.ToString();
+        timeLeft_Text.text = timeLeft.ToString();
 
         if (timeLeft <= 0)
         {
@@ -160,7 +162,7 @@ public class QuestionManager : MonoBehaviour
 
             choice1_Button.GetComponent<Image>().color = defaultButtonColor;
             choice2_Button.GetComponent<Image>().color = defaultButtonColor;
-            choice3_Button.GetComponent<Image>().color = defaultButtonColor;    
+            choice3_Button.GetComponent<Image>().color = defaultButtonColor;
             choice4_Button.GetComponent<Image>().color = defaultButtonColor;
 
             questionText.text = questions[currentQuestion].question.ToString();

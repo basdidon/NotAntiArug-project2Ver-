@@ -2,21 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 public class BulletsController : MonoBehaviour
 {
     public static BulletsController instance;
-
-    public static int bullet01_qty;
-    public static int bullet02_qty;
-    public static int bullet03_qty;
-    public static int bullet04_qty;
 
     public Sprite[] sprites;
     public GameObject[] bulletsPrefab;
     public List<Bullets> bullets = new List<Bullets>();
 
+    public bool isAddAntiAll,isAddAntiDepressants,isAddAntiHallucinogens,isAddAntiStimulants,isAddAntiMultipleEffect = false;
+
     [Header("Bullet")]
+    public Bullets antiAll;
     public Bullets antiDepressants;
     public Bullets antiHallucinogens;
     public Bullets antiStimulants;
@@ -26,32 +23,35 @@ public class BulletsController : MonoBehaviour
     {
         instance = this;
 
-        antiDepressants = new Bullets(Bullets.BulletsType.antiDepressants, "สลายยาเสพติดประเภท 1", 50, 5, "Depressants", sprites[0], bulletsPrefab[0]);
-        antiHallucinogens = new Bullets(Bullets.BulletsType.antiHallucinogens, "สลายยาเสพติดประเภท 2", 20, 5, "Hallucinogens", sprites[1], bulletsPrefab[1]);
-        antiStimulants = new Bullets(Bullets.BulletsType.antiStimulants, "", 50, 5, "",sprites[2], bulletsPrefab[2]);
-        antiMultipleEffect = new Bullets(Bullets.BulletsType.antiMultipleEffect, "", 25, 5, "", sprites[3], bulletsPrefab[3]);
+        //Bullets antiAll = new Bullets();
+        antiDepressants = new Bullets(Bullets.BulletsType.antiDepressants, "สลายยาเสพติดประเภท 1", 50, 5, "best bullet forever", sprites[0], bulletsPrefab[1]);
+        antiHallucinogens = new Bullets(Bullets.BulletsType.antiHallucinogens, "สลายยาเสพติดประเภท 2", 20, 5, "boom", sprites[1], bulletsPrefab[2]);
+        //Bullets antiStimulants = new Bullets();
+        //Bullets antiMultipleEffect = new Bullets();
 
-        if(LevelManager.instance.currentLv == 1)
+        if (isAddAntiAll)
         {
-            bullets.Add(antiDepressants);
-            if (LevelManager.isLoadGameSave)
-            {
-                bullets[0].currentBullets = bullet01_qty;
-            }
+            
         }
-        if(LevelManager.instance.currentLv == 2)
+        
+        if (isAddAntiDepressants)
         {
             bullets.Add(antiDepressants);
+        }
+        
+        if (isAddAntiHallucinogens)
+        {
             bullets.Add(antiHallucinogens);
         }
-        if(LevelManager.instance.currentLv == 3)
+        
+        if (isAddAntiStimulants)
         {
-            bullets.Add(antiDepressants);
-            bullets.Add(antiHallucinogens);
-            //
-            //
+            
         }
 
-        BulletsUI.instance.updateBulletUI();
+        if (isAddAntiMultipleEffect)
+        {
+
+        }
     }
 }

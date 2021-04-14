@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
 public class Enemy : MonoBehaviour
 {
     //public static Enemy instance;
+
     public ScriptableEnemy scriptableEnemy;
 
     public Transform hpBarHolder;
 
-    
+    //public GameObject itemDrop;
+
     public float enemyHp;
     public float hpPercentage = 1;
 

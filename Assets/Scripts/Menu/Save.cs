@@ -5,16 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class Save
 {
-    public int level = 0;
-
     public float playerPosX;
     public float playerPosY;
     public float playerHp;
-
-    public int[] bulletsLeft;
-
-    public List<EnemyDataToSave> enemiesList;
+    
+    public int currentBullet_0 = 0;
+    public int currentBullet_1 = 0;
 
     public int score;
 }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
